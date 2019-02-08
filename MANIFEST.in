@@ -1,0 +1,5 @@
+include tsg_insights_components/tsg_insights_components.min.js
+include tsg_insights_components/tsg_insights_components.dev.js
+include tsg_insights_components/metadata.json
+include tsg_insights_components/package.json
+include README.md
