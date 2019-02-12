@@ -49,8 +49,8 @@ app.layout = html.Div([
     html.H2([html.Pre('tsg_insights_components.InsightFoldable')]),
     tsg_insights_components.InsightFoldable(
         id='insights-foldable',
-        title='Click me to fold',
-        value='Shown when hidden',
+        title={'value': 'Click me to fold'},
+        value={'value': 'Shown when hidden'},
         children='Shown when not hidden',
     )
 ])

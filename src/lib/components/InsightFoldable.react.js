@@ -21,32 +21,35 @@ export default class InsightFoldable extends Component {
 
     render() {
         const {
-            className,
             id,
-            style,
+            container,
             title,
-            titleClassName,
-            titleFoldedClassName,
-            titleUnfoldedClassName,
-            titleStyle,
-            valueClassName,
-            valueStyle,
             value,
+            child,
             children,
             setProps,
         } = this.props;
         const { isHidden } = this.state;
 
-        valueStyle['display'] = (isHidden ? 'initial' : 'none');
-        let childStyle = { 'display': (isHidden ? 'none' : 'initial')};
+        if (!('style' in value)){
+            value['style'] = {}
+        }
+        if (!('style' in child)){
+            child['style'] = {}
+        }
+        value['style']['opacity'] = (isHidden ? '1' : '0');
+        child['style']['opacity'] = (isHidden ? '0' : '1');
 
-        let titleClass = titleClassName + " " + (isHidden ? titleFoldedClassName : titleUnfoldedClassName);
+        let containerClass = container.className + " " + (isHidden ? container.foldedClassName : container.unfoldedClassName);
+        let titleClass = title.className + " " + (isHidden ? title.foldedClassName : title.unfoldedClassName);
+        let valueClass = value.className + " " + (isHidden ? value.unfoldedClassName : value.foldedClassName);
+        let childClass = child.className + " " + (isHidden ? child.foldedClassName : child.unfoldedClassName);
 
         return (
-            <div id={id} style={style} className={className}>
-                <h4 className={titleClass} style={titleStyle} onClick={this.toggleHidden.bind(this)}>{title}</h4>
-                <h5 className={valueClassName} style={valueStyle}>{value}</h5>
-                <div style={childStyle}>
+            <div id={id} style={container.style} className={containerClass}>
+                <h4 className={titleClass} style={title.style} onClick={this.toggleHidden.bind(this)}>{title.value}</h4>
+                <h5 className={valueClass} style={value.style}>{value.value}</h5>
+                <div style={child.style} className={childClass}>
                     {children}
                 </div>
             </div>
@@ -54,59 +57,55 @@ export default class InsightFoldable extends Component {
     }
 }
 
-InsightFoldable.propTypes = {
-    id: PropTypes.string,
-
-
+const item_proptypes = {
     /**
-     * The title of the item (click this to toggle)
-     */
-    title: PropTypes.string,
-
-    /**
-     * The item shown if hidden
+     * string shown in the title (h4)
      */
     value: PropTypes.string,
 
     /**
-     * The class of the container (div)
+     * name of the class
      */
     className: PropTypes.string,
 
     /**
-     * The style of the container (div)
+     * class applied when folded
+     */
+    foldedClassName: PropTypes.string,
+
+    /**
+     * class applied when unfolded
+     */
+    unfoldedClassName: PropTypes.string,
+
+    /**
+     * The style applied
      */
     style: PropTypes.object,
+}
+
+InsightFoldable.propTypes = {
+    id: PropTypes.string,
 
     /**
-     * The style of the <h4> title element
+     * The container for the item
      */
-    titleStyle: PropTypes.object,
+    container: PropTypes.shape(item_proptypes),
 
     /**
-     * The class of the <h4> title element
+     * The title of the item (click this to toggle)
      */
-    titleClassName: PropTypes.string,
+    title: PropTypes.shape(item_proptypes),
 
     /**
-     * The class of the <h4> title element when folded
+     * The value (shown when the children are hidden)
      */
-    titleFoldedClassName: PropTypes.string,
+    value: PropTypes.shape(item_proptypes),
 
     /**
-     * The class of the <h4> title element when unfolded
+     * The child (shown when the item is toggled)
      */
-    titleUnfoldedClassName: PropTypes.string,
-
-    /**
-     * The style of the <h5> value element - shown if main element is hidden
-     */
-    valueStyle: PropTypes.object,
-
-    /**
-     * The class of the <h5> value element - shown if main element is hidden
-     */
-    valueClassName: PropTypes.string,
+    child: PropTypes.shape(item_proptypes),
 
     /**
      * The children of this component
@@ -120,10 +119,28 @@ InsightFoldable.propTypes = {
 };
 
 InsightFoldable.defaultProps = {
-    titleStyle: {},
-    titleClassName: '',
-    titleFoldedClassName: '',
-    titleUnfoldedClassName: '',
-    valueStyle: {},
-    valueClassName: '',
+    title: {
+        style: {},
+        className: '',
+        foldedClassName: '',
+        unfoldedClassName: '',
+    },
+    value: {
+        style: {},
+        className: '',
+        foldedClassName: '',
+        unfoldedClassName: '',
+    },
+    child: {
+        style: {},
+        className: '',
+        foldedClassName: '',
+        unfoldedClassName: '',
+    },
+    container: {
+        style: {},
+        className: '',
+        foldedClassName: '',
+        unfoldedClassName: '',
+    }
 };
