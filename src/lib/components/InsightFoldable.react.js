@@ -46,12 +46,6 @@ export default class InsightFoldable extends Component {
         value['style']['opacity'] = (isHidden ? '1' : '0');
         child['style']['opacity'] = (isHidden ? '0' : '1');
 
-
-        console.log(container.style);
-        console.log(title.style);
-        console.log(value.style);
-        console.log(child.style);
-
         var containerClass = (container.className ? container.className : '') + " " + (isHidden ? container.foldedClassName : container.unfoldedClassName);
         var titleClass = (title.className ? title.className : '') + " " + (isHidden ? title.foldedClassName : title.unfoldedClassName);
         var valueClass = (value.className ? value.className : '') + " " + (isHidden ? value.unfoldedClassName : value.foldedClassName);
