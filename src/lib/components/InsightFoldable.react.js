@@ -14,6 +14,7 @@ export default class InsightFoldable extends Component {
     }
 
     toggleHidden () {
+        console.log(this.state);
         this.setState({
             isHidden: !this.state.isHidden
         })
@@ -31,25 +32,36 @@ export default class InsightFoldable extends Component {
         } = this.props;
         const { isHidden } = this.state;
 
-        if (!('style' in value)){
-            value['style'] = {}
+        for (var c of [container, title, value, child]) {
+            if (!('style' in c)) {
+                c['style'] = {};
+            }
+            for (var f of ["className", "foldedClassName", "unfoldedClassName"]){
+                if (!(f in c)) {
+                    c[f] = '';
+                }
+            }
         }
-        if (!('style' in child)){
-            child['style'] = {}
-        }
+
         value['style']['opacity'] = (isHidden ? '1' : '0');
         child['style']['opacity'] = (isHidden ? '0' : '1');
 
-        let containerClass = container.className + " " + (isHidden ? container.foldedClassName : container.unfoldedClassName);
-        let titleClass = title.className + " " + (isHidden ? title.foldedClassName : title.unfoldedClassName);
-        let valueClass = value.className + " " + (isHidden ? value.unfoldedClassName : value.foldedClassName);
-        let childClass = child.className + " " + (isHidden ? child.foldedClassName : child.unfoldedClassName);
+
+        console.log(container.style);
+        console.log(title.style);
+        console.log(value.style);
+        console.log(child.style);
+
+        var containerClass = (container.className ? container.className : '') + " " + (isHidden ? container.foldedClassName : container.unfoldedClassName);
+        var titleClass = (title.className ? title.className : '') + " " + (isHidden ? title.foldedClassName : title.unfoldedClassName);
+        var valueClass = (value.className ? value.className : '') + " " + (isHidden ? value.unfoldedClassName : value.foldedClassName);
+        var childClass = (child.className ? child.className : '') + " " + (isHidden ? child.foldedClassName : child.unfoldedClassName);
 
         return (
             <div id={id} style={container.style} className={containerClass}>
-                <h4 className={titleClass} style={title.style} onClick={this.toggleHidden.bind(this)}>{title.value}</h4>
-                <h5 className={valueClass} style={value.style}>{value.value}</h5>
-                <div style={child.style} className={childClass}>
+                <h4 className={titleClass} key={title.style.opacity} style={title.style} onClick={this.toggleHidden.bind(this)}>{title.value}</h4>
+                <h5 className={valueClass} key={value.style.opacity} style={value.style}>{value.value}</h5>
+                <div style={child.style} key={child.style.opacity} className={childClass}>
                     {children}
                 </div>
             </div>
