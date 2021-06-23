@@ -14,7 +14,6 @@ export default class InsightFoldable extends Component {
     }
 
     toggleHidden () {
-        console.log(this.state);
         this.setState({
             isHidden: !this.state.isHidden
         })
@@ -43,8 +42,8 @@ export default class InsightFoldable extends Component {
             }
         }
 
-        value['style']['opacity'] = (isHidden ? '1' : '0');
-        child['style']['opacity'] = (isHidden ? '0' : '1');
+        value['style'] = Object.assign({}, value['style'], {'opacity': (isHidden ? '1' : '0')});
+        child['style'] = Object.assign({}, child['style'], {'opacity': (isHidden ? '0' : '1')});
 
         var containerClass = (container.className ? container.className : '') + " " + (isHidden ? container.foldedClassName : container.unfoldedClassName);
         var titleClass = (title.className ? title.className : '') + " " + (isHidden ? title.foldedClassName : title.unfoldedClassName);
@@ -91,6 +90,9 @@ const item_proptypes = {
 }
 
 InsightFoldable.propTypes = {
+    /*
+     * ID of the component
+     */
     id: PropTypes.string,
 
     /**

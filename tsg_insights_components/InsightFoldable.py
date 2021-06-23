@@ -4,7 +4,7 @@ from dash.development.base_component import Component, _explicitize_args
 
 
 class InsightFoldable(Component):
-    """A InsightFoldable component.
+    """An InsightFoldable component.
 An element that can be hidden by clicking on the `title`
 element. The `value` text is shown when hidden, otherwise
 `children` are displayed.
@@ -12,28 +12,48 @@ element. The `value` text is shown when hidden, otherwise
 Keyword arguments:
 - children (a list of or a singular dash component, string or number; optional): The children of this component
 - id (string; optional)
-- container (optional): The container for the item. container has the following type: dict containing keys 'value', 'className', 'foldedClassName', 'unfoldedClassName', 'style'.
+- container (dict; default {
+    style: {},
+    className: '',
+    foldedClassName: '',
+    unfoldedClassName: '',
+}): The container for the item. container has the following type: dict containing keys 'value', 'className', 'foldedClassName', 'unfoldedClassName', 'style'.
 Those keys have the following types:
   - value (string; optional): string shown in the title (h4)
   - className (string; optional): name of the class
   - foldedClassName (string; optional): class applied when folded
   - unfoldedClassName (string; optional): class applied when unfolded
   - style (dict; optional): The style applied
-- title (optional): The title of the item (click this to toggle). title has the following type: dict containing keys 'value', 'className', 'foldedClassName', 'unfoldedClassName', 'style'.
+- title (dict; default {
+    style: {},
+    className: '',
+    foldedClassName: '',
+    unfoldedClassName: '',
+}): The title of the item (click this to toggle). title has the following type: dict containing keys 'value', 'className', 'foldedClassName', 'unfoldedClassName', 'style'.
 Those keys have the following types:
   - value (string; optional): string shown in the title (h4)
   - className (string; optional): name of the class
   - foldedClassName (string; optional): class applied when folded
   - unfoldedClassName (string; optional): class applied when unfolded
   - style (dict; optional): The style applied
-- value (optional): The value (shown when the children are hidden). value has the following type: dict containing keys 'value', 'className', 'foldedClassName', 'unfoldedClassName', 'style'.
+- value (dict; default {
+    style: {},
+    className: '',
+    foldedClassName: '',
+    unfoldedClassName: '',
+}): The value (shown when the children are hidden). value has the following type: dict containing keys 'value', 'className', 'foldedClassName', 'unfoldedClassName', 'style'.
 Those keys have the following types:
   - value (string; optional): string shown in the title (h4)
   - className (string; optional): name of the class
   - foldedClassName (string; optional): class applied when folded
   - unfoldedClassName (string; optional): class applied when unfolded
   - style (dict; optional): The style applied
-- child (optional): The child (shown when the item is toggled). child has the following type: dict containing keys 'value', 'className', 'foldedClassName', 'unfoldedClassName', 'style'.
+- child (dict; default {
+    style: {},
+    className: '',
+    foldedClassName: '',
+    unfoldedClassName: '',
+}): The child (shown when the item is toggled). child has the following type: dict containing keys 'value', 'className', 'foldedClassName', 'unfoldedClassName', 'style'.
 Those keys have the following types:
   - value (string; optional): string shown in the title (h4)
   - className (string; optional): name of the class

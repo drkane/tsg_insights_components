@@ -50,7 +50,7 @@ export default class InsightChecklist extends Component {
             <fieldset id={id} style={style} className={className}>
                 <ul className={ulClassName} style={ulStyle}>
                 {options.map(option => (
-                    <li className={liClassName} style={liStyle}>
+                    <li className={liClassName} style={liStyle} key={id + "-" + option.value}>
                         <input
                             id={id + "-" + option.value}
                             checked={contains(option.value, value)}
@@ -88,6 +88,9 @@ export default class InsightChecklist extends Component {
 }
 
 InsightChecklist.propTypes = {
+    /*
+     * ID of the component
+     */
     id: PropTypes.string,
 
     /**

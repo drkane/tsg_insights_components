@@ -28,13 +28,22 @@ export default class InsightDropdown extends Component {
         } = this.props;
         const { value } = this.state;
 
+        var selectValue = value;
+        if(!multi){
+            if(value){
+                selectValue = selectValue[0];
+            } else {
+                selectValue = null;
+            }
+        }
+
         return (
             <div id={id} style={style} className={className}>
                 <select
                     className={selectClassName}
                     style={selectStyle}
                     multiple={multi}
-                    value={value}
+                    value={selectValue}
                     onChange={(e) => {
                         let newValue = [];
                         for (var i = 0, l = e.target.options.length; i < l; i++) {
@@ -52,7 +61,7 @@ export default class InsightDropdown extends Component {
                     <option
                         value={option.value}
                         disabled={Boolean(option.disabled)}
-                        selected={contains(option.value, value)}
+                        key={option.value}
                     >
                         {option.label}
                     </option>
@@ -64,6 +73,9 @@ export default class InsightDropdown extends Component {
 }
 
 InsightDropdown.propTypes = {
+    /*
+     * ID of the component
+     */
     id: PropTypes.string,
 
     /**

@@ -4,24 +4,24 @@ from dash.development.base_component import Component, _explicitize_args
 
 
 class InsightDropdown(Component):
-    """A InsightDropdown component.
+    """An InsightDropdown component.
 Dropdown list of options
 
 Keyword arguments:
 - id (string; optional)
-- options (optional): An array of options. options has the following type: list of dict containing keys 'label', 'value', 'disabled'.
+- options (dict; optional): An array of options. options has the following type: list of dicts containing keys 'label', 'value', 'disabled'.
 Those keys have the following types:
   - label (string; optional): The checkbox's label
   - value (string; optional): The value of the checkbox. This value
 corresponds to the items specified in the
 `value` property.
-  - disabled (boolean; optional): If true, this checkbox is disabled and can't be clicked on.s
+  - disabled (boolean; optional): If true, this checkbox is disabled and can't be clicked on.
 - value (list of strings; optional): The currently selected value
 - className (string; optional): The class of the container (div)
 - style (dict; optional): The style of the container (div)
 - selectStyle (dict; optional): The style of the <select> element
-- selectClassName (string; optional): The class of the <select> element
-- multi (boolean; optional): Whether it's a multi select or not"""
+- selectClassName (string; default ''): The class of the <select> element
+- multi (boolean; default False): Whether it's a multi select or not"""
     @_explicitize_args
     def __init__(self, id=Component.UNDEFINED, options=Component.UNDEFINED, value=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, selectStyle=Component.UNDEFINED, selectClassName=Component.UNDEFINED, multi=Component.UNDEFINED, **kwargs):
         self._prop_names = ['id', 'options', 'value', 'className', 'style', 'selectStyle', 'selectClassName', 'multi']
